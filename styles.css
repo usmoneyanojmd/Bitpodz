@@ -1,0 +1,140 @@
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #0f172a;
+}
+
+.container {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 384px;
+    text-align: center;
+}
+
+.logo {
+    width: 120px;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    color: #020617;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+h2 {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #334155;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    background-color: #ffffff;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #94a3b8;
+    box-shadow: 0 0 0 1px #e2e8f0;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #1e293b;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.links a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.links a:hover {
+    color: #334155;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    color: #94a3b8;
+    font-size: 0.75rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.divider::before {
+    margin-right: 0.5rem;
+}
+
+.divider::after {
+    margin-left: 0.5rem;
+}

